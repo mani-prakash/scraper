@@ -6,7 +6,7 @@ There are 3 api call in the project
  
 1) 
 Will jut serve a html page which contains a input feild  
-Enter the url and press the options available sync or async  
+Enter the url and press the options available sync or async to get the csv file  
 
 
 api /sync   
