@@ -26,9 +26,16 @@ There are two api calls
 
 Both api calls have a request parameter which is url its value being the url of the web page the user wants to scrap.  
 
+#### example  
+
+https://scraperdev.herokuapp.com/scrap?url=https://medium.com/product-hunt/8-apps-that-will-make-you-less-productive-eb00e4063b82#.7zgq09xcl  
+
+https://scraperdev.herokuapp.com/async?url=https://medium.com/product-hunt/8-apps-that-will-make-you-less-productive-eb00e4063b82#.7zgq09xcl    
+
 ### response  
 
 The response is a csv file, which contains all the hyperlinks and their occurrence count in the scrapped webpage.  
+
 
 ## webpage  
 
