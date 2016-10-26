@@ -1,16 +1,23 @@
 <html>
 	<head>
 		<script type="text/javascript">
-			function getCsv(){
+			function getSyncCsv(){
 				var value = document.querySelector('#url').value;
 				console.log('/sync?url='+value)
 				window.location = '/sync?url='+value
+			}
+
+			function getAsyncCsv(){
+				var value = document.querySelector('#url').value;
+				console.log('/async?url='+value)
+				window.location = '/async?url='+value
 			}
 		</script>
 	</head>
 	<body>
 		<h1>Scrapper</h1>
 		<input type="text" id='url'></input>
-		<button onclick="getCsv()">Get CSV</button>
+		<button onclick="getSyncCsv()">Get CSV Sync</button>
+		<button onclick="getAsyncCsv()">Get CSV Async</button>
 	</body>
 </html>

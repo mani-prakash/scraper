@@ -25,7 +25,7 @@ router.get('/sync', function (req, res) {
       return res.status(500).send(err)
     }
     res.set('Content-Type', 'application/octet-stream')
-    res.set('Content-Disposition', 'attachment; filename=hyperlinks.csv' )
+    res.set('Content-Disposition', 'attachment; filename=syncHyperlinks.csv' )
     res.end(data)
   })
 })
@@ -44,7 +44,7 @@ router.get('/async', function (req, res) {
       return res.status(500).send(err)
     }
     res.set('Content-Type', 'application/octet-stream')
-    res.set('Content-Disposition', 'attachment; filename=baby.csv' )
+    res.set('Content-Disposition', 'attachment; filename=asyncHyperlinks.csv' )
     res.end(data)
   })
 })
