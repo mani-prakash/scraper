@@ -15,6 +15,12 @@ I've written two api call one which uses async library and other which doesn't u
 
 Most of the code was written using callbacks, so the functionality is mostly asynchronous.   
  
+## api's
+
+There are two api calls  
+  /scrap --  uses normal callbacks to scrap the webpage and send the response.   
+  /async --  uses async library to implement the functionality.    
+
 
 ### request  
 
