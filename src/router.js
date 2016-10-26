@@ -1,16 +1,13 @@
 var router = require('express').Router()
 var controller = require('./controller')
-var throttle = require("express-throttle")
 
 var currentRequests = 0
-
-router.use(throttle({ "rate": "5/s" }))
 
 router.get('/', function(req, res){
     res.sendfile('index.html');
 });
 
-router.get('/sync', function (req, res) {
+router.get('/scrap', function (req, res) {
   var url = req.query.url
   if(!url) {
     return res.status(400).send('Invalid URL, I didn\'t expect this from you :(')
@@ -25,7 +22,7 @@ router.get('/sync', function (req, res) {
       return res.status(500).send(err)
     }
     res.set('Content-Type', 'application/octet-stream')
-    res.set('Content-Disposition', 'attachment; filename=syncHyperlinks.csv' )
+    res.set('Content-Disposition', 'attachment; filename=Hyperlinks.csv' )
     res.end(data)
   })
 })
