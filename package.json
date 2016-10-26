@@ -1,0 +1,18 @@
+{
+  "name": "scraper",
+  "version": "1.0.0",
+  "description": "Reads a Medium article and returns all the urls in a csv file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.1.2",
+    "express": "^4.14.0",
+    "express-throttle": "^2.0.0",
+    "jquery": "^3.1.1",
+    "request": "^2.76.0"
+  }
+}
