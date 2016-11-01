@@ -1,6 +1,23 @@
 var request = require('request')
 var async = require('async')
+var cheerio = require('cheerio')
 
+var url = 'http://www.medium.com';
+
+var getUrlsFromPage = function( url, callback )
+{
+  var urls = []
+  return request(url, function(err, resp, body){
+    $ = cheerio.load(body);
+    links = $('a');
+    $(links).each(function(i, link){
+      urls.push($(link).attr('href'))
+    });
+    return callback(null, urls)
+  });
+}
+//console.log($(link).text() + ':\n  ' + $(link).attr('href'));
+//getUrlsFromPage(url, null)
 var processRequest = function (url, callback) {
 
   return loadPage(url, function (err, page) {
@@ -8,8 +25,19 @@ var processRequest = function (url, callback) {
       console.log('Error reading page for URL: ' + url + ' ' + err)
       return callback(err)
     }
-    return pageToCsv(page, callback)
+    return listUrls(page, callback)
   })
+}
+
+var listUrls = function(page, callback){
+  var urls = getUrls(page)
+  console.log('controller')
+  console.log(urls)
+  var listUrls = [];
+  for(var url in urls) {
+    listUrls.push(url)  
+  }
+  return callback(null, url)
 }
 
 var processRequestAsyncly = function (url, callback) {
@@ -35,6 +63,8 @@ var pageToCsv = function (page, callback) {
 var getUrls = function (page) {
   var urls = {};
   var segments = page.split('\"href\":\"')
+  console.log('length')
+  console.log(segments.length)
   for(var i = 1 ; i < segments.length ; i++) {
     var url = segments[i].split('\"')[0]
     if(!urls[url]){
@@ -42,6 +72,8 @@ var getUrls = function (page) {
     }
     urls[url]++
   }
+  console.log('get urls')
+  console.log(urls)
   return urls
 }
 
@@ -65,6 +97,8 @@ var loadPage = function (url, callback) {
 }
 
 module.exports = {
-  processRequest: processRequest,
+  processRequest: getUrlsFromPage,
   processRequestAsyncly: processRequestAsyncly
 }
+
+//processRequest
