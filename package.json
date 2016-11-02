@@ -11,9 +11,7 @@
   "dependencies": {
     "async": "^2.1.2",
     "cheerio": "^0.22.0",
-    "express": "^4.14.0",
-    "express-throttle": "^2.0.0",
-    "ineed": "^1.0.4",
+    "fs": "0.0.1-security",
     "jquery": "^3.1.1",
     "request": "^2.76.0"
   }

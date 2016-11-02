@@ -1,38 +1,25 @@
 var Queue = require('./src/Queue.js')
 var utils = require('./src/utils.js')
+var async = require('async')
 var foo = (function(url, crawlDepth, callback) {
   var queue = new Queue()
   queue.push({ url : url, depth : 1 })
-  var visitedUrls = { }
-  visitedUrls[url] = true
+  var visitedUrls = { url : true }
   var count = 1
+  function worker(cb) {
+        if (count < 5 && queue.length > 0) {
+          count++
+          var urlObject = queue.shift() 
+          console.log(urlObject)
+          crawl(urlObject.url, urlObject.depth, cb)
+        } else
+          return cb(null)
+  }
   var initWorkers = function (callback) {
     count--
-    var ret = 0
-    var done = function(err) {
-      ret--
-      if(ret == 0) {
-        return callback()
-      }
-    }
-    function worker(cb) {
-      ret++
-      if (count < 5 && queue.length > 0) {
-        count++
-        var urlObject = queue.shift() 
-        console.log(urlObject)
-        bar(urlObject.url, urlObject.depth, cb)
-      } 
-      else
-        return cb(null)
-    }
-    worker(done)
-    worker(done)
-    worker(done)
-    worker(done)
-    worker(done)
+    async.parallel([worker,worker,worker,worker,worker],callback)
   }
-  var bar = function (url, depth, callback) {
+  var crawl = function (url, depth, callback) {
     return utils.getUrlsFromPage(url, function(err, urls){
       pushUrls(urls, depth)
       return initWorkers(callback)
