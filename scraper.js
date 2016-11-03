@@ -32,7 +32,7 @@ var foo = (function(url, crawlDepth, callback) {
     worker(done)
     worker(done)
   }
-  var bar = function (url, depth, callback) {
+  var crawl = function (url, depth, callback) {
     return utils.getUrlsFromPage(url, function(err, urls){
       pushUrls(urls, depth)
       return initWorkers(callback)
