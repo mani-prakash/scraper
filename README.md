@@ -7,14 +7,18 @@ scraper.js contains the code to crawl the webpage without using async library
 asyncScraper.js contains the code to crawl the webpage using async library  
 
 ## Throttle  
-A varaible is used maintain the no of requests made at present, if this variable is more than 5 additional requests will be halted  
+A varaible is used maintain the no of requests made at present, if this variable is more than 5 then additional requests will be halted  
 
 
 ## Run Commands
 
-nodejs scarper.js crawls the webpage and saves the urls to a urls.csv file 
+nodejs scarper.js 3  
+crawls the webpage and saves the urls to a urls.csv file  
 
-nodejs asyncScarper.js crawls the webpage using async library and saves the urls to a urls.csv file 
+nodejs asyncScarper.js  3 
+crawls the webpage using async library and saves the urls to a urls.csv file 
+
+The argument passed in the cmds is the depth the crawler should go, if its not mentioned then the default value is 2  
 
 ## Control Flow
 
@@ -22,12 +26,11 @@ When a queue is updated initWorkers function will be called which will activates
 
 Worker function will check a requests count at present, if its less than 5 then a request will be made to scrap a url from the queue   
 
-The workers will be initiated diffrently in asyncScraper and scraper
+The workers will be initiated diffrently in asyncScraper and scraper  
 
+async.parllel is used to call worker in asyncScraper   
 
-async.parllel is used to call worker function in asyncScraper  
-
-callback mechanism is used to call worker funciton is scraper  
+callback mechanism is used to call worker in scraper  
 
 
 

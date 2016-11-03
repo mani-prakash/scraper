@@ -1,16 +1,16 @@
 var Queue = require('./src/Queue.js')
 var utils = require('./src/utils.js')
 var async = require('async')
-var foo = (function(url, crawlDepth, callback) {
+var crawler = (function(url, crawlDepth, callback) {
   var queue = new Queue()
   queue.push({ url : url, depth : 1 })
-  var visitedUrls = { url : true }
+  var visitedUrls = { }
+  visitedUrls[ url ] = true
   var count = 1
   function worker(cb) {
         if (count < 5 && queue.length > 0) {
           count++
           var urlObject = queue.shift() 
-          console.log(urlObject)
           crawl(urlObject.url, urlObject.depth, cb)
         } else
           return cb(null)
@@ -48,6 +48,17 @@ var foo = (function(url, crawlDepth, callback) {
   return initWorkers(function (err) {
     return callback(null, Object.keys(visitedUrls).join())
   })
-})('http://www.medium.com', 2, function(err, data){
-    utils.writeFile('urls.csv', data)
 })
+
+
+function initCrawler(){
+  var depth = 2
+  if( process.argv.length === 3 && !isNaN(process.argv[2]) ){
+    depth = parseInt(process.argv[2])
+  }
+  crawler('http://www.medium.com', depth, function(err, data){
+    utils.writeFile('urls.csv', data)
+  })
+}
+
+initCrawler()
