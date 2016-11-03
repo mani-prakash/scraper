@@ -15,7 +15,7 @@ A varaible is used maintain the no of requests made at present, if this variable
 nodejs scarper.js 3  
 crawls the webpage and saves the urls to a urls.csv file  
 
-nodejs asyncScarper.js  3 
+nodejs asyncScarper.js  3   
 crawls the webpage using async library and saves the urls to a urls.csv file 
 
 The argument passed in the cmds is the depth the crawler should go, if its not mentioned then the default value is 2  
